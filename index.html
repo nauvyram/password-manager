@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaultify | Premium Password Manager</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Authentication Container (Setup or Unlock) -->
+    <div id="auth-container" class="app-container">
+        <header>
+            <h1>Vault<span>ify</span></h1>
+            <p>Secure. Premium. Yours.</p>
+        </header>
+
+        <!-- Initial Setup Screen -->
+        <main id="setup-screen" class="glass-panel hidden">
+            <h2>Create Master Password</h2>
+            <p class="auth-subtitle">Your master password uniquely encrypts your vault. If you lose it, your data cannot be recovered.</p>
+            <form id="setup-form">
+                <div class="input-group">
+                    <label for="setup-password">Master Password</label>
+                    <input type="password" id="setup-password" required minlength="8" placeholder="Enter at least 8 characters">
+                </div>
+                <div class="input-group">
+                    <label for="setup-confirm">Confirm Password</label>
+                    <input type="password" id="setup-confirm" required minlength="8" placeholder="Confirm your password">
+                </div>
+                <p id="setup-error" class="error-text hidden">Passwords do not match.</p>
+                <button type="submit" class="btn-primary">Create Secure Vault</button>
+            </form>
+        </main>
+
+        <!-- Unlock Screen -->
+        <main id="unlock-screen" class="glass-panel hidden">
+            <div class="unlock-header">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lock-icon"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                <h2>Vault Locked</h2>
+            </div>
+            <p class="auth-subtitle text-center">Enter your master password to decrypt your credentials locally.</p>
+            <form id="unlock-form">
+                <div class="input-group">
+                    <label for="unlock-password">Master Password</label>
+                    <input type="password" id="unlock-password" required placeholder="Enter password to unlock">
+                </div>
+                <p id="unlock-error" class="error-text hidden">Incorrect password or corrupted vault. Please try again.</p>
+                <button type="submit" class="btn-primary">Unlock Vault</button>
+            </form>
+            <button id="reset-vault-btn" class="btn-text danger-text mt-4">Reset Vault (Erases Data)</button>
+        </main>
+    </div>
+
+    <!-- Main Vault App Container -->
+    <div id="app-container" class="app-container hidden">
+        <header class="app-header">
+            <div class="branding">
+                <h1>Vault<span>ify</span></h1>
+            </div>
+            <button id="lock-btn" class="btn-secondary" aria-label="Lock Vault">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                Lock
+            </button>
+        </header>
+
+        <main>
+            <section class="add-credential-section glass-panel">
+                <h2>Add Credential</h2>
+                <form id="credential-form">
+                    <div class="input-group">
+                        <label for="website">Website / App</label>
+                        <input type="text" id="website" placeholder="e.g., github.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Username / Email</label>
+                        <input type="text" id="username" placeholder="e.g., user@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="password-input-wrapper">
+                            <input type="password" id="password" placeholder="Enter secure password" required>
+                            <button type="button" id="toggle-password-visibility" class="icon-btn" aria-label="Toggle visibility">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-primary">Save Credential securely</button>
+                </form>
+            </section>
+
+            <section class="vault-section">
+                <div class="vault-header">
+                    <h2>Your Secure Vault</h2>
+                    <div class="search-bar">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                        <input type="text" id="search-input" placeholder="Search vault...">
+                    </div>
+                </div>
+                <div id="credentials-list" class="credentials-list">
+                    <!-- Cards will be injected here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
